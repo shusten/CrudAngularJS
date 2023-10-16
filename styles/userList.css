@@ -1,0 +1,12 @@
+.title_list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.form_line{
+    width: 99%;
+    border-bottom: 2px solid rgb(222, 222, 222);
+}

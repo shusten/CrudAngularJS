@@ -1,0 +1,149 @@
+<div class="container">
+    <h2 class="h2 display-6 mb-4">Nova Pessoa</h2>
+    <div class="border pe-4">
+        <form class="row g-3 mt-3">
+            <h5 class="row justify-content-center">Dados Pessoais</h5>
+            <div class="col ms-3 text-secondary fw-bolder">
+                <div class="row mb-3">
+                    <label for="nome" class="col-sm-4 col-form-label label-large">Nome</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control input-small" id="nome" ng-model="formData.nome">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-4 col-form-label label-large">Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control input-small" id="email"
+                            placeholder="seu-email@email.com" ng-model="formData.email">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="telefone" class="col-sm-4 col-form-label label-large">Telefone</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control input-small" id="telefone" ng-model="formData.telefone">
+                    </div>
+                </div>
+            </div>
+            <div class="col ms-3 text-secondary fw-bolder">
+                <div class="row mb-3">
+                    <label for="idade" class="col-sm-4 col-form-label label-large">Idade</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control input-small" id="idade" ng-model="formData.idade">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="dataNascimento" class="col-sm-4 col-form-label label-large">Data de nascimento</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control input-small" id="dataNascimento"
+                            ng-model="formData.dataNascimento">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="outroEmail" class="col-sm-4 col-form-label label-large">Celular</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control input-small" id="celular" ng-model="formData.celular">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form class="row g-3 mt-3">
+            <div class="row justify-content-center ms-2">
+                <div class="form_line"></div>
+            </div>
+            <h5 class="row mt-3 justify-content-center">Endereços</h5>
+            <div class="col ms-3 text-secondary fw-bolder">
+                <div class="row mb-3">
+                    <label for="nome" class="col-sm-4 col-form-label label-large">Logradouro</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control input-small" id="nome">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="email" class="col-sm-4 col-form-label label-large">Bairro</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control input-small">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="telefone" class="col-sm-4 col-form-label label-large">UF</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control input-small">
+                    </div>
+                </div>
+            </div>
+            <div class="col ms-3 text-secondary fw-bolder">
+                <div class="row mb-3">
+                    <label for="idade" class="col-sm-4 col-form-label label-large">Número</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control input-small">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="dataNascimento" class="col-sm-4 col-form-label label-large">Cidade</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control input-small">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="button" ng-click="submitFormUser()"
+                        class="btn btn-primary text-light font-weight-bold mb-2">
+                        Adicionar
+                    </button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-bordered table-striped mt-3 ms-3">
+            <thead>
+                <tr>
+                    <th colspan="6" class="text-start">Endereços</th>
+                </tr>
+                <tr>
+                    <th scope="col">Logradouro</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Bairro</th>
+                    <th scope="col">Cidade-UF</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rua dos pássaros</td>
+                    <td>03</td>
+                    <td>Mata Escura</td>
+                    <td>São Paulo-SP</td>
+                    <td class="d-flex justify-content-center">
+                        <button 
+                            type="button" 
+                            class="btn btn-danger btn-sm"
+                        >
+                        <img style="width: 18px; height: 18px;" src="/assets/trash.svg">
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Avenida Teste</td>
+                    <td>108</td>
+                    <td>Pituba</td>
+                    <td>Salvador-BA</td>
+                    <td class="d-flex justify-content-center">
+                        <button 
+                            type="button" 
+                            class="btn btn-danger btn-sm"
+                        >
+                        <img style="width: 18px; height: 18px;" src="/assets/trash.svg">
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-between">
+            <button type="button" ng-click="redirectToHome()"
+                class="btn btn-primary text-light font-weight-bold ms-3 mb-2">
+                Voltar
+            </button>
+            <button type="button" class="btn btn-primary text-light font-weight-bold mb-2">
+                Salvar
+            </button>
+        </div>
+    </div>
+</div>

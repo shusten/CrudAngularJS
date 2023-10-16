@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="title_list border-bottom mb-3">
+        <h2 class="text-secondary">Listagem</h2>
+        <button 
+            type="button" 
+            ng-click="redirectToUserForm()"
+            class="btn btn-primary float-md-right text-light font-weight-bold mb-3"
+        >
+            Criar nova pessoa
+        </button>
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Data de nascimento</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Celular</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users">
+                    <td>{{user.nome}}</td>
+                    <td>{{user.idade}}</td>
+                    <td>{{user.dataNascimento | date:'dd/MM/yyyy'}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.telefone}}</td>
+                    <td>{{user.celular}}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm">
+                            <img style="width: 18px; height: 18px;" src="/assets/edit.svg">
+                        </button>
+                        <button 
+                            type="button" 
+                            class="btn btn-danger btn-sm"
+                            ng-click="deleteUser(user.pessoaId)"
+                        >
+                        <img style="width: 18px; height: 18px;" src="/assets/trash.svg">
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

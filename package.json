@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "lite-server"
+  },
+  "name": "starcorp",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
