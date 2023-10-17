@@ -35,7 +35,7 @@
                     <label for="dataNascimento" class="col-sm-4 col-form-label label-large">Data de nascimento</label>
                     <div class="col-sm-8">
                         <input type="date" class="form-control input-small" id="dataNascimento"
-                            ng-model="formData.dataNascimento">
+                        ng-model="formData.dataNascimento" ng-value="formData.dataNascimento | date:'yyyy-MM-dd'">
                     </div>
                 </div>
                 <div class="row mb-3">

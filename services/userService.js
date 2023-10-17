@@ -2,7 +2,7 @@ angular.module('myApp').service('userService', function($http) {
     var baseUrl = 'https://www.selida.com.br/avaliacaotecnica/api';
     var config = {
         headers: {
-            'Chave': '2BB44D7A-2743-4D3E-8107-00BA51B7E05F'
+            'Chave': 'C5954C09-F8CF-4679-B52B-A74AA5EBCC55'
         }
     };
 
@@ -11,7 +11,7 @@ angular.module('myApp').service('userService', function($http) {
     };
 
     this.getUserById = function(userId) {
-        return $http.get(baseUrl + '/users/' + userId);
+        return $http.get(baseUrl + '/Pessoas/' + userId, config);
     };
 
     this.createUser = function(user) {
@@ -19,7 +19,7 @@ angular.module('myApp').service('userService', function($http) {
     };
 
     this.updateUser = function(userId, user) {
-        return $http.put(baseUrl + '/users/' + userId, user);
+        return $http.put(baseUrl + '/Pessoas/' + userId, user, config);
     };
 
     this.deleteUser = function(userId) {

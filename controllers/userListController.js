@@ -4,6 +4,10 @@ angular.module('myApp').controller('UserListController', function($scope, $locat
         $location.path('/user-form');
     };
 
+    $scope.redirectToUserFormById = function(userId) {
+        $location.path('/user-form/' + userId);
+    };
+
     function fetchUsers() {
         userService.getUsers()
         .then(function(response) {
@@ -23,6 +27,18 @@ angular.module('myApp').controller('UserListController', function($scope, $locat
         })
         .catch(function(error) {
             console.error('Erro ao excluir o usuário:', error);
+        });
+    };
+
+    $scope.fetchUserById = function(userId) {
+        userService.getUserById(userId)
+        .then(function(response) {
+            console.log('fetchUserById', response);
+            $scope.users = response.data.data;
+            $scope.redirectToUserFormById(userId);
+        })
+        .catch(function(error) {
+            console.error('Erro fetchUserById:', error);
         });
     };
 

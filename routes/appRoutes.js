@@ -8,6 +8,10 @@ angular.module('myApp').config(function($routeProvider) {
         templateUrl: 'templates/user-list.html',
         controller: 'UserListController'
     })
+    .when('/user-form/:userId', {
+        templateUrl: 'templates/user-form.html',
+        controller: 'UserFormController'
+    })
     .otherwise({
         redirectTo: '/user-list'
     });

@@ -31,7 +31,11 @@
                     <td>{{user.telefone}}</td>
                     <td>{{user.celular}}</td>
                     <td>
-                        <button type="button" class="btn btn-warning btn-sm">
+                        <button 
+                            type="button"
+                            class="btn btn-warning btn-sm"
+                            ng-click="fetchUserById(user.pessoaId)"
+                        >
                             <img style="width: 18px; height: 18px;" src="/assets/edit.svg">
                         </button>
                         <button 
