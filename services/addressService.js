@@ -6,23 +6,23 @@ angular.module('myApp').service('addressService', function($http) {
         }
     };
 
-    this.getEndereco = function(enderecoId) {
-        return $http.get(baseUrl + '/Endereco/' + enderecoId, config);
+    this.getAddress = function(addressId) {
+        return $http.get(baseUrl + '/Endereco/' + addressId, config);
     };
 
-    this.createEndereco = function(endereco) {
-        return $http.post(baseUrl + '/Endereco', endereco, config);
+    this.createAddress = function(address) {
+        return $http.post(baseUrl + '/Endereco', address, config);
     };
 
-    this.updateEndereco = function(enderecoId, endereco) {
-        return $http.put(baseUrl + '/Endereco/' + enderecoId, endereco, config);
+    this.updateAddress = function(addressId, address) {
+        return $http.put(baseUrl + '/Endereco/' + addressId, address, config);
     };
 
-    this.deleteEndereco = function(enderecoId) {
-        return $http.delete(baseUrl + '/Endereco/' + enderecoId, config);
+    this.deleteAddress = function(addressId) {
+        return $http.delete(baseUrl + '/Endereco/' + addressId, config);
     };
 
-    this.getEnderecosByPessoa = function(pessoaId) {
-        return $http.get(baseUrl + '/Endereco/GetAll/' + pessoaId, config);
+    this.getAddressByUser = function(userId) {
+        return $http.get(baseUrl + '/Endereco/GetAll/' + userId, config);
     };
 });

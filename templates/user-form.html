@@ -1,4 +1,6 @@
-<div class="container">
+<link rel="stylesheet" type="text/css" href="/styles/userForm.css">
+
+<div class="container pb-4">
     <h2 class="h2 display-6 mb-4">Nova Pessoa</h2>
     <div class="border pe-4">
         <form class="row g-3 mt-3">
@@ -55,44 +57,48 @@
                 <div class="row mb-3">
                     <label for="nome" class="col-sm-4 col-form-label label-large">Logradouro</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control input-small" id="nome">
+                        <input type="text" class="form-control input-small" id="logradouro" ng-model="addressFormData.logradouro">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="email" class="col-sm-4 col-form-label label-large">Bairro</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control input-small">
+                        <input type="text" class="form-control input-small" ng-model="addressFormData.bairro">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="telefone" class="col-sm-4 col-form-label label-large">UF</label>
+                    <label for "telefone" class="col-sm-4 col-form-label label-large">UF</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control input-small">
+                        <input type="text" class="form-control input-small" ng-model="addressFormData.uf">
                     </div>
                 </div>
-            </div>
-            <div class="col ms-3 text-secondary fw-bolder">
-                <div class="row mb-3">
-                    <label for="idade" class="col-sm-4 col-form-label label-large">Número</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control input-small">
-                    </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="dataNascimento" class="col-sm-4 col-form-label label-large">Cidade</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control input-small">
+                <div class="col ms-3 text-secondary fw-bolder">
+                    <div class="row mb-3">
+                        <label for "idade" class="col-sm-4 col-form-label label-large">Número</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control input-small" ng-model="addressFormData.numero">
+                        </div>
                     </div>
-                </div>
+                    <div class="row mb-3">
+                        <label for "dataNascimento" class="col-sm-4 col-form-label label-large">Cidade</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control input-small" ng-model="addressFormData.cidade">
+                        </div>
+                    </div>
                 <div class="d-flex justify-content-end">
-                    <button type="button" ng-click="submitFormUser()"
+                    <button ng-if="!editMode" type="button" ng-click="addAddress()"
                         class="btn btn-primary text-light font-weight-bold mb-2">
                         Adicionar
+                    </button>
+                    <button ng-if="editMode" type="button" ng-click="updateAddress()"
+                        class="btn btn-primary text-light font-weight-bold mb-2">
+                        Atualizar
                     </button>
                 </div>
             </div>
         </form>
-        <table class="table table-bordered table-striped mt-3 ms-3">
+        <table class="table table-bordered table-striped table-hover mt-3 ms-3 custom-table">
             <thead>
                 <tr>
                     <th colspan="6" class="text-start">Endereços</th>
@@ -106,28 +112,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Rua dos pássaros</td>
-                    <td>03</td>
-                    <td>Mata Escura</td>
-                    <td>São Paulo-SP</td>
+                <tr ng-repeat="address in addressData">
+                    <td ng-click="fillAddressForm(address)">{{address.logradouro}}</td>
+                    <td ng-click="fillAddressForm(address)">{{address.numero}}</td>
+                    <td ng-click="fillAddressForm(address)">{{address.bairro}}</td>
+                    <td ng-click="fillAddressForm(address)">{{address.cidade}}-{{address.uf}}</td>
                     <td class="d-flex justify-content-center">
-                        <button 
-                            type="button" 
-                            class="btn btn-danger btn-sm"
-                        >
-                        <img style="width: 18px; height: 18px;" src="/assets/trash.svg">
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Avenida Teste</td>
-                    <td>108</td>
-                    <td>Pituba</td>
-                    <td>Salvador-BA</td>
-                    <td class="d-flex justify-content-center">
-                        <button 
-                            type="button" 
+                        <button type="button" ng-click="deleteAddress(address.enderecoId)"
                             class="btn btn-danger btn-sm"
                         >
                         <img style="width: 18px; height: 18px;" src="/assets/trash.svg">
@@ -141,7 +132,9 @@
                 class="btn btn-primary text-light font-weight-bold ms-3 mb-2">
                 Voltar
             </button>
-            <button type="button" class="btn btn-primary text-light font-weight-bold mb-2">
+            <button type="button" ng-click="submitFormUser()"
+                class="btn btn-primary text-light font-weight-bold mb-2"
+            >
                 Salvar
             </button>
         </div>
