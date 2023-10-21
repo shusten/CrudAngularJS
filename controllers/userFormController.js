@@ -1,7 +1,5 @@
-angular.module('myApp').controller('UserFormController', function ($routeParams, $location, userService, addressService) {
-    var vm = this;
-
-    vm.formData = {
+angular.module('myApp').controller('UserFormController', function ($scope, $routeParams, $location, userService, addressService) {
+    $scope.formData = {
         nome: '',
         dataNascimento: new Date(''),
         idade: '',
@@ -10,7 +8,7 @@ angular.module('myApp').controller('UserFormController', function ($routeParams,
         celular: ''
     };
 
-    vm.addressFormData = {
+    $scope.addressFormData = {
         pessoaId: 1,
         logradouro: '',
         numero: '',
@@ -19,30 +17,30 @@ angular.module('myApp').controller('UserFormController', function ($routeParams,
         uf: ''
     };
 
-    vm.editMode = false;
+    $scope.editMode = false;
     var userId = $routeParams.userId;
     var addressId = 0;
 
-    vm.redirectToHome = redirectToHome;
-    vm.submitFormUser = submitFormUser;
-    vm.addAddress = addAddress;
-    vm.fillAddressForm = fillAddressForm;
-    vm.updateAddress = updateAddress;
-    vm.deleteAddress = deleteAddress;
-    vm.checkIdToAddAddress = checkIdToAddAddress;
-    vm.openSaveUserModal = openSaveUserModal;
-    vm.closeSaveUserModal = closeSaveUserModal;
-    vm.saveUser = saveUser;
+    //Lembrar de colocar as funções no $scope
 
-    // Inicialização
-    console.log('Chamou fora');
+    $scope.redirectToHome = redirectToHome;
+    $scope.submitFormUser = submitFormUser;
+    $scope.addAddress = addAddress;
+    $scope.fillAddressForm = fillAddressForm;
+    $scope.updateAddress = updateAddress;
+    $scope.deleteAddress = deleteAddress;
+    $scope.checkIdToAddAddress = checkIdToAddAddress;
+    $scope.openSaveUserModal = openSaveUserModal;
+    $scope.closeSaveUserModal = closeSaveUserModal;
+    $scope.saveUser = saveUser;
     
     if (userId) {
         console.log('Chamou inicialização');
         userService.getUserById(userId)
         .then(function (response) {
             var userData = response.data.data;
-            vm.formData = userData;
+            $scope.formData = userData;
+            $scope.formData.dataNascimento = new Date($scope.formData.dataNascimento);
             getAllAddress();
         })
         .catch(function (error) {
@@ -50,7 +48,6 @@ angular.module('myApp').controller('UserFormController', function ($routeParams,
         });
     }
 
-    // Outras funções
     function redirectToHome() {
         $location.path('/');
     }
@@ -65,8 +62,8 @@ angular.module('myApp').controller('UserFormController', function ($routeParams,
     }
 
     function createUser() {
-        vm.formData.idade = Number(vm.formData.idade);
-        userService.createUser(vm.formData)
+        $scope.formData.idade = Number($scope.formData.idade);
+        userService.createUser($scope.formData)
         .then(function (response) {
             console.log('Post response:', response);
             redirectToHome();
@@ -77,8 +74,8 @@ angular.module('myApp').controller('UserFormController', function ($routeParams,
     }
 
     function updateUser() {
-        vm.formData.idade = Number(vm.formData.idade);
-        userService.updateUser(userId, vm.formData)
+        $scope.formData.idade = Number($scope.formData.idade);
+        userService.updateUser(userId, $scope.formData)
         .then(function (response) {
             console.log('Atualização feita com sucesso:', response);
             redirectToHome();
@@ -92,7 +89,7 @@ angular.module('myApp').controller('UserFormController', function ($routeParams,
         addressService.getAddressByUser(userId)
         .then(function (response) {
             var addressData = response.data.data;
-            vm.addressData = addressData;
+            $scope.addressData = addressData;
         })
         .catch(function (error) {
             console.error('Erro ao buscar endereço:', error);
@@ -102,23 +99,22 @@ angular.module('myApp').controller('UserFormController', function ($routeParams,
     function addAddress() {
         var novoEndereco = {
             pessoaId: parseInt(userId),
-            logradouro: vm.addressFormData.logradouro,
-            numero: vm.addressFormData.numero,
-            bairro: vm.addressFormData.bairro,
-            cidade: vm.addressFormData.cidade,
-            uf: vm.addressFormData.uf
+            logradouro: $scope.addressFormData.logradouro,
+            numero: $scope.addressFormData.numero,
+            bairro: $scope.addressFormData.bairro,
+            cidade: $scope.addressFormData.cidade,
+            uf: $scope.addressFormData.uf
         };
 
         addressService.createAddress(novoEndereco)
         .then(function (response) {
-            vm.addressFormData.logradouro = '';
-            vm.addressFormData.numero = '';
-            vm.addressFormData.bairro = '';
-            vm.addressFormData.cidade = '';
-            vm.addressFormData.uf = '';
+            $scope.addressFormData.logradouro = '';
+            $scope.addressFormData.numero = '';
+            $scope.addressFormData.bairro = '';
+            $scope.addressFormData.cidade = '';
+            $scope.addressFormData.uf = '';
 
             getAllAddress();
-            //openSaveUserModal();
         })
         .catch(function (error) {
             console.error('Erro ao adicionar endereço:', error);
@@ -126,28 +122,28 @@ angular.module('myApp').controller('UserFormController', function ($routeParams,
     }
 
     function fillAddressForm(address) {
-        vm.addressFormData.logradouro = address.logradouro;
-        vm.addressFormData.numero = address.numero;
-        vm.addressFormData.bairro = address.bairro;
-        vm.addressFormData.cidade = address.cidade;
-        vm.addressFormData.uf = address.uf;
+        $scope.addressFormData.logradouro = address.logradouro;
+        $scope.addressFormData.numero = address.numero;
+        $scope.addressFormData.bairro = address.bairro;
+        $scope.addressFormData.cidade = address.cidade;
+        $scope.addressFormData.uf = address.uf;
 
         addressId = address.enderecoId;
-        vm.editMode = true;
+        $scope.editMode = true;
     }
 
     function updateAddress() {
         var enderecoAtualizado = {
-            logradouro: vm.addressFormData.logradouro,
-            numero: parseInt(vm.addressFormData.numero),
-            bairro: vm.addressFormData.bairro,
-            cidade: vm.addressFormData.cidade,
-            uf: vm.addressFormData.uf
+            logradouro: $scope.addressFormData.logradouro,
+            numero: parseInt($scope.addressFormData.numero),
+            bairro: $scope.addressFormData.bairro,
+            cidade: $scope.addressFormData.cidade,
+            uf: $scope.addressFormData.uf
         };
 
         addressService.updateAddress(addressId, enderecoAtualizado)
         .then(function (response) {
-            vm.addressFormData = {
+            $scope.addressFormData = {
                 logradouro: '',
                 numero: '',
                 bairro: '',
@@ -155,7 +151,7 @@ angular.module('myApp').controller('UserFormController', function ($routeParams,
                 uf: ''
             };
 
-            vm.editMode = false;
+            $scope.editMode = false;
             getAllAddress();
         })
         .catch(function (error) {
@@ -188,8 +184,8 @@ angular.module('myApp').controller('UserFormController', function ($routeParams,
     }
 
     function saveUser() {
-        vm.formData.idade = Number(vm.formData.idade);
-        userService.createUser(vm.formData)
+        $scope.formData.idade = Number($scope.formData.idade);
+        userService.createUser($scope.formData)
         .then(function (response) {
             getUserToAddAddress();
         })
