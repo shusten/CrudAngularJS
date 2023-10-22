@@ -21,8 +21,6 @@ angular.module('myApp').controller('UserFormController', function ($scope, $rout
     var userId = $routeParams.userId;
     var addressId = 0;
 
-    //Lembrar de colocar as funções no $scope
-
     $scope.redirectToHome = redirectToHome;
     $scope.submitFormUser = submitFormUser;
     $scope.addAddress = addAddress;
@@ -96,6 +94,7 @@ angular.module('myApp').controller('UserFormController', function ($scope, $rout
         });
     }
 
+    
     function addAddress() {
         var novoEndereco = {
             pessoaId: parseInt(userId),
